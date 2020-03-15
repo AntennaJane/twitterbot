@@ -18,6 +18,7 @@ $parameters = [
     "count" => 1,
     "include_rts" => false,
     "trim_user" => true,
+    "tweet_mode" => "extended",
     "user_id" => $ini["USER_ID"],
 ];
 
@@ -34,10 +35,14 @@ foreach (array_reverse($contents) as $content) {
 
     $keys = array_key_exists("KEYS", $ini) ? $ini["KEYS"] : [];
     foreach ($keys as $key) {
-        if (preg_match($ini["SEARCHES"][$key], $content->text)) {
+        if (preg_match($ini["SEARCHES"][$key], $content->full_text, $matches)) {
+            $tweet = $ini["TWEETS"][$key];
+            foreach ($matches as $index => $match) {
+                $tweet = str_replace('{{'.$index.'}}', $match, $tweet);
+            }
             $connection->post("statuses/update", [
                 "in_reply_to_status_id" => $content->id,
-                "status" => $ini["TWEETS"][$key],
+                "status" => $tweet,
                 "trim_user" => true,
             ]);
         }
