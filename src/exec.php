@@ -21,6 +21,7 @@ $connection = new TwitterOAuth($ini["CONSUMER_KEY"], $ini["CONSUMER_SECRET"], $i
 //}
 
 $connection->post("statuses/update", [
-    "status" => "テストツイート成功……",
+    "in_reply_to_status_id" => "1239170497067139077",
+    "status" => "ツリー作成成功……？",
     "trim_user" => true,
 ]);
