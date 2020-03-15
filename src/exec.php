@@ -31,12 +31,17 @@ $contents = $connection->get("statuses/user_timeline", $parameters);
 
 foreach (array_reverse($contents) as $content) {
     $id = $content->id;
+
+    $keys = array_key_exists("KEYS", $ini) ? $ini["KEYS"] : [];
+    foreach ($keys as $key) {
+        if (preg_match($ini["SEARCHES"][$key], $content->text)) {
+            $connection->post("statuses/update", [
+                "in_reply_to_status_id" => $content->id,
+                "status" => $ini["TWEETS"][$key],
+                "trim_user" => true,
+            ]);
+        }
+    }
 }
 
 file_put_contents(PATH_LAST_TWEET, $id);
-
-//$connection->post("statuses/update", [
-//    "in_reply_to_status_id" => "1239170497067139077",
-//    "status" => "ツリー作成成功……？",
-//    "trim_user" => true,
-//]);

@@ -4,3 +4,9 @@ CONSUMER_SECRET = ""
 ACCESS_TOKEN = ""
 ACCESS_TOKEN_SECRET = ""
 USER_ID = ""
+
+;必ず KEYS, SEARCHES, TWEETS をセットで設定すること
+;また、SEARCHESはデリミタ付き正規表現であるため注意すること
+;KEYS[] = "test"
+;SEARCHES[test] = "/検索正規表現/"
+;TWEETS[test] = "ぶら下げるツイート"
