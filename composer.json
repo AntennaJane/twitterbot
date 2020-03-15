@@ -1,0 +1,12 @@
+{
+  "name": "AntennaJane/twitterbot",
+  "description": "AntennaJane's twitter bot",
+  "minimum-stability": "dev",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "AntennaJane",
+      "email": "middlestar_elen@yahoo.co.jp"
+    }
+  ]
+}
